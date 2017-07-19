@@ -3666,7 +3666,7 @@
 		}
 
 	#three {
-		padding: 2em 0 2em 0;
+		padding: 1em 0 1em 0;
 	}
 
 		#three .inner {
@@ -3719,7 +3719,7 @@
 		@media screen and (max-width: 980px) {
 
 			#three {
-				padding: 4em 0 2em 0;
+				padding: 1em 0 1em 0;
 			}
 
 		}
@@ -3727,7 +3727,7 @@
 		@media screen and (max-width: 736px) {
 
 			#three {
-				padding: 2em 0 0.1em 0;
+				padding: 1em 0 0.1em 0;
 			}
 
 		}
