@@ -35,11 +35,13 @@
 						<p>A model WWII enigma machine built baremetal on a raspberry pi</p>
 					</header>
 
-					<video width="640" height="360" autoplay loop>
+					<!-- <video width="640" height="360" autoplay loop> -->
+					<video controls autoplay>
 					<source src="../images/Enigma_Demo.mp4" type="video/mp4">
 					<source src="../images/Enigma_Demo.ogg" type="video/ogg">
 					Your browser does not support the video tag.
 				  </video>
+
 					<p>"RaspEE aims to emulate a classical Werhmacht Engima 1 electro-mechanical rotor cipher machine used in World War II to encode and decode messages. It was famously cracked by Allied cryptologists with the aid of computer-science fame Alan Turing."</p>
 					<p>I took CS107E spring of 2017, a class that teaches baremetal C (and a little ARM assembly) on a raspberry pi. The enigma machine was our end-of-class project. Our group (me, Eldrick, and John) built a computational model of an enigma machine, complete with software implementations of rotors, reflection disks, and plugboards true to the original model. We also built a working mechanical lightboard hooked up to a keyboard, monitor, and speaker. Our goal was to create an enigma machine model that visually displayed the electromechanical complexity of the original device. The screen showed the path of the electric connection through the machine as the rotors turned, and the lightboard showed what letter the pressed key was converted to. (One of the cool traits of the enigma machine is that it isn't one to one, or in other words pressing the same letter multiple times will produce a different output letter each time. This is thanks to the rotating nature of the encoding path in the machine. This was also a flaw in the enigma machine: because of the mechanics of the machine a letter could never map back to itself. This was one of the factors that eventually led to its decoding by the Allied powers.)</p>
 					<p>Most of the project was written baremetal in C on the Raspberry Pi A+, using code we had previously developed over the course as a library to base our work off of. I think we might have written a little assembly to interface with the speaker (bare metal can be annoying). Overall I thought it was a great experience! It was pretty smooth teamwork and equal contribution. It taught me a lot about system-level design thinking as well.</p>
