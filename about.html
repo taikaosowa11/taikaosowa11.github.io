@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="site">
+  <nav class="site-nav">
+    <a href="about.html" class="active">About</a>
+    <a href="photos.html">Photos</a>
+    <a href="cv.html">CV</a>
+    <a href="links.html">Links</a>
+  </nav>
+
+  <h1>About</h1>
+
+  <div class="about-layout">
+    <!--
+      Portrait: add a file named images/portrait.jpg and it will
+      replace this placeholder automatically.
+    -->
+    <div class="about-portrait">
+      <img src="images/portrait.jpg" alt=""
+           onload="this.nextElementSibling.remove();"
+           onerror="this.remove();">
+      <span>add images/portrait.jpg</span>
+    </div>
+
+    <div class="about-text">
+      <!-- Replace this paragraph with your own bio. -->
+      <p>Write a short bio here.</p>
+    </div>
+  </div>
+</div>
+</body>
+</html>

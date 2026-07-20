@@ -1,0 +1,330 @@
+/* ============================================================
+   Base — minimal, editorial. Adjust these variables to theme.
+   ============================================================ */
+:root {
+  --ink: #111;
+  --paper: #fff;
+  --muted: #888;
+  --line: #ddd;
+  --gap: 2.5rem;
+  --font: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-serif: Georgia, "Times New Roman", Times, serif;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* ---------- Landing page ---------- */
+
+.landing {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  display: block;
+  background: #000;
+}
+
+.landing-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.92;
+}
+
+/* Shown automatically when images/landing.jpg is missing or fails to load,
+   so the page still looks intentional before a photo is added. */
+.landing-fallback {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f4f4f4;
+}
+
+.landing-fallback span {
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: var(--muted);
+  font-size: 1rem;
+}
+
+.landing-hint {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #fff;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  opacity: 0.85;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+}
+
+/* ---------- Site chrome (every page but the landing) ---------- */
+
+.site {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 6rem;
+}
+
+.site-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.75rem;
+  margin-bottom: var(--gap);
+}
+
+.site-nav a {
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding-bottom: 2px;
+  border-bottom: 1px solid transparent;
+}
+
+.site-nav a:hover,
+.site-nav a.active {
+  color: var(--ink);
+  border-bottom-color: var(--ink);
+}
+
+.site-title {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.1rem;
+  margin: 0 0 3rem;
+}
+
+h1 {
+  font-weight: 300;
+  font-size: 1.6rem;
+  letter-spacing: 0.02em;
+  margin: 0 0 2rem;
+}
+
+h2 {
+  font-weight: 300;
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 2.5rem 0 1rem;
+}
+
+p { margin: 0 0 1.2rem; }
+
+/* ---------- About ---------- */
+
+.about-layout {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 3rem;
+}
+
+.about-portrait {
+  aspect-ratio: 4 / 5;
+  background: #f2f2f2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 1rem;
+}
+
+.about-portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 640px) {
+  .about-layout {
+    grid-template-columns: 1fr;
+  }
+  .about-portrait {
+    max-width: 220px;
+  }
+}
+
+/* ---------- CV ---------- */
+
+.cv-download {
+  display: inline-block;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border: 1px solid var(--ink);
+  padding: 0.6rem 1.1rem;
+  margin-bottom: 2.5rem;
+}
+
+.cv-download:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.cv-entry {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 1.5rem;
+  margin-bottom: 1.4rem;
+  padding-bottom: 1.4rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.cv-entry:last-child { border-bottom: none; }
+
+.cv-date {
+  font-size: 0.75rem;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+}
+
+.cv-role { font-weight: 400; margin: 0 0 0.2rem; }
+.cv-org { color: var(--muted); margin: 0 0 0.4rem; font-size: 0.9rem; }
+
+@media (max-width: 640px) {
+  .cv-entry { grid-template-columns: 1fr; gap: 0.3rem; }
+}
+
+/* ---------- Links ---------- */
+
+.links-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.links-list li {
+  border-bottom: 1px solid var(--line);
+}
+
+.links-list a {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 1.1rem 0;
+  font-size: 1rem;
+}
+
+.links-list a:hover { color: var(--muted); }
+
+.links-list .links-arrow {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+/* ---------- Photo albums grid ---------- */
+
+.album-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+
+@media (min-width: 640px) {
+  .album-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+.album-tile {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  background: var(--paper);
+  overflow: hidden;
+  display: block;
+}
+
+.album-tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.album-tile:hover img { transform: scale(1.04); }
+
+.album-tile-label {
+  position: absolute;
+  left: 0.9rem;
+  bottom: 0.8rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.album-tile.has-image .album-tile-label {
+  color: #fff;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.55);
+}
+
+/* ---------- Single album (scrolling single column) ---------- */
+
+.photo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 640px;
+}
+
+.photo-list figure {
+  margin: 0;
+}
+
+.photo-list img {
+  width: 100%;
+  height: auto;
+}
+
+.photo-list-empty {
+  color: var(--muted);
+  font-size: 0.85rem;
+  border: 1px dashed var(--line);
+  padding: 2rem;
+  text-align: center;
+}
+
+.back-link {
+  display: inline-block;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 2rem;
+}
+
+.back-link:hover { color: var(--ink); }

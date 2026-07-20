@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Photos</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="site">
+  <nav class="site-nav">
+    <a href="about.html">About</a>
+    <a href="photos.html" class="active">Photos</a>
+    <a href="cv.html">CV</a>
+    <a href="links.html">Links</a>
+  </nav>
+
+  <h1>Photos</h1>
+
+  <!--
+    Each tile below looks for a cover image at:
+      images/photos/<album>/cover.jpg
+    Drop a cover.jpg into an album folder and it appears automatically.
+    If it's missing, the tile just shows the album name on a plain
+    background — nothing to configure.
+  -->
+  <div class="album-grid">
+
+    <a class="album-tile has-image" href="photos/alleys.html">
+      <img src="images/photos/alleys/cover.jpg" alt=""
+           onerror="this.closest('.album-tile').classList.remove('has-image'); this.remove();">
+      <span class="album-tile-label">Alleys</span>
+    </a>
+
+    <a class="album-tile has-image" href="photos/self-portraits.html">
+      <img src="images/photos/self-portraits/cover.jpg" alt=""
+           onerror="this.closest('.album-tile').classList.remove('has-image'); this.remove();">
+      <span class="album-tile-label">Self-Portraits</span>
+    </a>
+
+    <a class="album-tile has-image" href="photos/nature.html">
+      <img src="images/photos/nature/cover.jpg" alt=""
+           onerror="this.closest('.album-tile').classList.remove('has-image'); this.remove();">
+      <span class="album-tile-label">Nature</span>
+    </a>
+
+    <a class="album-tile has-image" href="photos/bichrome.html">
+      <img src="images/photos/bichrome/cover.jpg" alt=""
+           onerror="this.closest('.album-tile').classList.remove('has-image'); this.remove();">
+      <span class="album-tile-label">Bichrome</span>
+    </a>
+
+    <a class="album-tile has-image" href="photos/dystopia.html">
+      <img src="images/photos/dystopia/cover.jpg" alt=""
+           onerror="this.closest('.album-tile').classList.remove('has-image'); this.remove();">
+      <span class="album-tile-label">Dystopia</span>
+    </a>
+
+    <a class="album-tile has-image" href="photos/cats.html">
+      <img src="images/photos/cats/cover.jpg" alt=""
+           onerror="this.closest('.album-tile').classList.remove('has-image'); this.remove();">
+      <span class="album-tile-label">Cats</span>
+    </a>
+
+    <a class="album-tile has-image" href="photos/windows.html">
+      <img src="images/photos/windows/cover.jpg" alt=""
+           onerror="this.closest('.album-tile').classList.remove('has-image'); this.remove();">
+      <span class="album-tile-label">Windows</span>
+    </a>
+
+  </div>
+</div>
+</body>
+</html>
