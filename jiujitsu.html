@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jiu Jitsu</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="site">
+  <nav class="site-nav">
+    <a href="about.html">About</a>
+    <a href="photos.html">Photos</a>
+    <a href="craftsmanship.html">Craftsmanship</a>
+    <a href="jiujitsu.html" class="active">Jiu Jitsu</a>
+    <a href="links.html">Links</a>
+  </nav>
+
+  <h1>Jiu Jitsu</h1>
+
+  <a class="contact-button" href="https://thecurrents.substack.com/t/jiu-jitsu" target="_blank" rel="noopener">Read My Writings</a>
+
+  <h2>Lineage</h2>
+  <div class="cv-entry">
+    <div class="cv-date">Brown Belt</div>
+    <div><p class="cv-role">Sang Mercado</p></div>
+  </div>
+  <div class="cv-entry">
+    <div class="cv-date">Purple Belt</div>
+    <div><p class="cv-role">Romulo Melo</p></div>
+  </div>
+  <div class="cv-entry">
+    <div class="cv-date">Blue Belt</div>
+    <div><p class="cv-role">Kevin Kopecky</p></div>
+  </div>
+
+  <h2>Tournament Results</h2>
+  <div class="cv-entry">
+    <div class="cv-date">2026</div>
+    <div>
+      <p class="cv-role">Santa Cruz International Open — Adult Gi Brown Belt Middleweight</p>
+      <p class="cv-org">1st place</p>
+    </div>
+  </div>
+  <div class="cv-entry">
+    <div class="cv-date">2025</div>
+    <div>
+      <p class="cv-role">San Jose International Open — Adult Gi Brown Belt Middleweight</p>
+      <p class="cv-org">1st place</p>
+    </div>
+  </div>
+
+  <h2>Photos</h2>
+  <div class="photo-list"></div>
+
+  <script>
+    // ALBUM must match the folder name under images/jiujitsu/
+    var IMAGE_PREFIX = "images/";
+    var ALBUM_BASE = "jiujitsu";
+    var ALBUM = "photos";
+
+    // To add a photo: put the image file in images/jiujitsu/photos/
+    // and add its filename below, one per line, in the order you want
+    // it to appear. Example:
+    //   "01.jpg",
+    //   "02.jpg",
+    var PHOTOS = [
+    ];
+  </script>
+  <script src="js/album.js"></script>
+</div>
+</body>
+</html>

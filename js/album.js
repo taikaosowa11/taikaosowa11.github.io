@@ -3,7 +3,10 @@
 // images/<ALBUM_BASE>/<ALBUM>/ and add its filename as one more line in
 // the PHOTOS array — no other changes needed. ALBUM_BASE defaults to
 // "photos" if a page doesn't set it (used by the Photos albums); other
-// sections like Craftsmanship set ALBUM_BASE = "craftsmanship".
+// sections like Craftsmanship set ALBUM_BASE = "craftsmanship". Pages
+// one folder deep (photos/*.html, craftsmanship/*.html) don't need to
+// set IMAGE_PREFIX — it defaults to "../images/". Root-level pages
+// (like jiujitsu.html) set IMAGE_PREFIX = "images/" instead.
 //
 // Layout: square/landscape photos span both columns. Portrait photos
 // pair up two-per-row. If a run of consecutive portrait photos is odd
@@ -31,6 +34,7 @@
   }
 
   var base = (typeof ALBUM_BASE !== "undefined") ? ALBUM_BASE : "photos";
+  var prefix = (typeof IMAGE_PREFIX !== "undefined") ? IMAGE_PREFIX : "../images/";
 
   var figures = new Array(PHOTOS.length).fill(null);
   var settled = new Array(PHOTOS.length).fill(false);
@@ -39,7 +43,7 @@
   PHOTOS.forEach(function (filename, idx) {
     var figure = document.createElement("figure");
     var img = document.createElement("img");
-    img.src = "../images/" + base + "/" + ALBUM + "/" + filename;
+    img.src = prefix + base + "/" + ALBUM + "/" + filename;
     img.alt = "";
     img.loading = "lazy";
 
