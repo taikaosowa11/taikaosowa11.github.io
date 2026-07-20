@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Craftsmanship</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="site">
+  <nav class="site-nav">
+    <a href="about.html">About</a>
+    <a href="photos.html">Photos</a>
+    <a href="craftsmanship.html" class="active">Craftsmanship</a>
+    <a href="links.html">Links</a>
+  </nav>
+
+  <h1>Craftsmanship</h1>
+
+  <!--
+    Same pattern as the Photos grid: each tile looks for a cover image at
+      images/craftsmanship/<slug>/cover.jpg
+    Drop a cover.jpg in and it appears automatically; if it's missing,
+    the tile just shows the title on a plain background.
+
+    To add another piece: copy one of the <a class="album-tile"> blocks
+    below, point the href at a new craftsmanship/<slug>.html page, and
+    change the image path + label to match.
+  -->
+  <div class="album-grid">
+
+    <a class="album-tile has-image" href="craftsmanship/woodworking.html">
+      <img src="images/craftsmanship/woodworking/cover.jpg" alt=""
+           onerror="this.closest('.album-tile').classList.remove('has-image'); this.remove();">
+      <span class="album-tile-label">Woodworking</span>
+    </a>
+
+    <a class="album-tile has-image" href="craftsmanship/jade.html">
+      <img src="images/craftsmanship/jade/cover.jpg" alt=""
+           onerror="this.closest('.album-tile').classList.remove('has-image'); this.remove();">
+      <span class="album-tile-label">Jade</span>
+    </a>
+
+  </div>
+</div>
+</body>
+</html>

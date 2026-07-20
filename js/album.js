@@ -1,7 +1,9 @@
 // Renders the PHOTOS array (defined inline in each album page) into the
 // .photo-list container. To add a photo: drop the image file into
-// images/photos/<ALBUM>/ and add its filename as one more line in the
-// PHOTOS array — no other changes needed.
+// images/<ALBUM_BASE>/<ALBUM>/ and add its filename as one more line in
+// the PHOTOS array — no other changes needed. ALBUM_BASE defaults to
+// "photos" if a page doesn't set it (used by the Photos albums); other
+// sections like Craftsmanship set ALBUM_BASE = "craftsmanship".
 //
 // Layout: square/landscape photos span both columns. Portrait photos
 // pair up two-per-row. If a run of consecutive portrait photos is odd
@@ -28,6 +30,8 @@
     container.appendChild(empty);
   }
 
+  var base = (typeof ALBUM_BASE !== "undefined") ? ALBUM_BASE : "photos";
+
   var figures = new Array(PHOTOS.length).fill(null);
   var settled = new Array(PHOTOS.length).fill(false);
   var wide = new Array(PHOTOS.length).fill(false);
@@ -35,7 +39,7 @@
   PHOTOS.forEach(function (filename, idx) {
     var figure = document.createElement("figure");
     var img = document.createElement("img");
-    img.src = "../images/photos/" + ALBUM + "/" + filename;
+    img.src = "../images/" + base + "/" + ALBUM + "/" + filename;
     img.alt = "";
     img.loading = "lazy";
 
