@@ -228,6 +228,23 @@ p { margin: 0 0 1.2rem; }
   color: var(--paper);
 }
 
+/* ---------- Contact button (About) ---------- */
+
+.contact-button {
+  display: inline-block;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border: 1px solid var(--ink);
+  padding: 0.6rem 1.1rem;
+  margin-top: 0.5rem;
+}
+
+.contact-button:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
 .cv-entry {
   display: grid;
   grid-template-columns: 110px 1fr;
