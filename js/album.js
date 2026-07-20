@@ -7,72 +7,76 @@
 // pair up two-per-row. If a run of consecutive portrait photos is odd
 // (would leave one stranded next to a gap), the last one in that run
 // is shown full width instead.
+//
+// Photos are inserted right away and load lazily (so the page appears
+// instantly and only downloads images as you scroll to them); the
+// odd-run fix-up runs quietly in the background once everything has
+// finished loading, without blocking the initial render.
 (function () {
   var container = document.querySelector(".photo-list");
   if (!container) return;
 
   if (typeof PHOTOS === "undefined" || !PHOTOS.length) {
+    showEmpty();
+    return;
+  }
+
+  function showEmpty() {
     var empty = document.createElement("div");
     empty.className = "photo-list-empty";
     empty.textContent = "No photos yet — add filenames to the PHOTOS list in this page.";
     container.appendChild(empty);
-    return;
   }
 
-  function probe(filename) {
-    return new Promise(function (resolve) {
-      var img = new Image();
-      img.onload = function () {
-        resolve({ filename: filename, width: img.naturalWidth, height: img.naturalHeight, ok: true });
-      };
-      img.onerror = function () {
-        resolve({ filename: filename, ok: false });
-      };
-      img.src = "../images/photos/" + ALBUM + "/" + filename;
+  var figures = new Array(PHOTOS.length).fill(null);
+  var settled = new Array(PHOTOS.length).fill(false);
+  var wide = new Array(PHOTOS.length).fill(false);
+
+  PHOTOS.forEach(function (filename, idx) {
+    var figure = document.createElement("figure");
+    var img = document.createElement("img");
+    img.src = "../images/photos/" + ALBUM + "/" + filename;
+    img.alt = "";
+    img.loading = "lazy";
+
+    img.addEventListener("load", function () {
+      wide[idx] = img.naturalWidth >= img.naturalHeight;
+      if (wide[idx]) figure.classList.add("photo-wide");
+      settled[idx] = true;
+      maybeFixOddRuns();
     });
-  }
+    img.addEventListener("error", function () {
+      figure.remove();
+      figures[idx] = null;
+      settled[idx] = true;
+      maybeFixOddRuns();
+    });
 
-  Promise.all(PHOTOS.map(probe)).then(function (results) {
-    var photos = results.filter(function (r) { return r.ok; });
+    figure.appendChild(img);
+    container.appendChild(figure);
+    figures[idx] = figure;
+  });
 
-    if (!photos.length) {
-      var empty = document.createElement("div");
-      empty.className = "photo-list-empty";
-      empty.textContent = "No photos yet — add filenames to the PHOTOS list in this page.";
-      container.appendChild(empty);
-      return;
-    }
+  // Once every photo has loaded (or failed), do a final pass: any run of
+  // consecutive portrait photos with an odd count gets its last photo
+  // switched to full width instead of left stranded next to a gap.
+  function maybeFixOddRuns() {
+    if (settled.indexOf(false) !== -1) return;
 
-    var wide = photos.map(function (r) { return r.width >= r.height; });
-
-    // Walk runs of consecutive portrait photos; an odd-length run gets
-    // its last photo bumped to full width so nothing sits alone next
-    // to an empty gap.
     var i = 0;
-    while (i < wide.length) {
-      if (wide[i]) {
+    while (i < figures.length) {
+      if (!figures[i] || wide[i]) {
         i++;
         continue;
       }
       var start = i;
-      while (i < wide.length && !wide[i]) i++;
+      while (i < figures.length && figures[i] && !wide[i]) i++;
       var runLength = i - start;
       if (runLength % 2 === 1) {
-        wide[i - 1] = true;
+        var lastIdx = i - 1;
+        wide[lastIdx] = true;
+        figures[lastIdx].classList.add("photo-wide");
       }
     }
-
-    photos.forEach(function (r, idx) {
-      var figure = document.createElement("figure");
-      var img = document.createElement("img");
-      img.src = "../images/photos/" + ALBUM + "/" + r.filename;
-      img.alt = "";
-      img.loading = "lazy";
-      if (wide[idx]) {
-        figure.classList.add("photo-wide");
-      }
-      figure.appendChild(img);
-      container.appendChild(figure);
-    });
-  });
+  }
 })();
