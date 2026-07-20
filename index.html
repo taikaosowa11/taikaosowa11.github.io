@@ -8,15 +8,37 @@
 </head>
 <body>
 <!--
-  Landing page: full-bleed photo, click anywhere to enter the site.
-  To set your photo: add a file named "landing.jpg" to the images/
-  folder. Nothing else needs to change — if the file is missing,
-  a plain placeholder shows instead so the page still looks fine.
+  Landing page: full-bleed photo. Click anywhere to reveal white
+  buttons linking to each page. To set your photo: add a file named
+  "landing.jpg" to the images/ folder — if it's missing, a plain
+  placeholder shows instead so the page still looks fine.
 -->
-<a class="landing" href="about.html" aria-label="Enter site">
+<div class="landing" id="landing" role="button" tabindex="0" aria-label="Show site menu">
   <img class="landing-photo" src="images/landing.jpg" alt=""
        onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'landing-fallback',innerHTML:'<span>add images/landing.jpg</span>'}));">
   <span class="landing-hint">Click anywhere to enter</span>
-</a>
+  <nav class="landing-menu">
+    <a href="about.html">About</a>
+    <a href="photos.html">Photos</a>
+    <a href="craftsmanship.html">Craftsmanship</a>
+    <a href="links.html">Links</a>
+  </nav>
+</div>
+<script>
+  var landing = document.getElementById("landing");
+  function reveal() {
+    landing.classList.add("revealed");
+  }
+  landing.addEventListener("click", function (e) {
+    if (e.target.closest("a")) return; // let menu links navigate normally
+    reveal();
+  });
+  landing.addEventListener("keydown", function (e) {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      reveal();
+    }
+  });
+</script>
 </body>
 </html>

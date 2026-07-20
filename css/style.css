@@ -46,6 +46,7 @@ img {
   overflow: hidden;
   display: block;
   background: #000;
+  cursor: pointer;
 }
 
 .landing-photo {
@@ -84,6 +85,46 @@ img {
   text-transform: uppercase;
   opacity: 0.85;
   text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+  transition: opacity 0.25s ease;
+}
+
+.landing.revealed .landing-hint {
+  opacity: 0;
+}
+
+/* White boxes with the page links, shown on click */
+.landing-menu {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 2rem;
+  background: rgba(0, 0, 0, 0.15);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.landing.revealed .landing-menu {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.landing-menu a {
+  background: var(--paper);
+  color: var(--ink);
+  padding: 1rem 1.8rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+}
+
+.landing-menu a:hover {
+  background: #eee;
 }
 
 /* ---------- Site chrome (every page but the landing) ---------- */
