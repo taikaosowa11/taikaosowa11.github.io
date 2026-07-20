@@ -280,22 +280,34 @@ p { margin: 0 0 1.2rem; }
   text-shadow: 0 1px 6px rgba(0,0,0,0.55);
 }
 
-/* ---------- Single album (scrolling single column) ---------- */
+/* ---------- Single album ----------
+   Portrait photos pair up two-per-row; square or landscape photos
+   (class added automatically once the image loads) span the full width. */
 
 .photo-list {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 1.5rem;
-  max-width: 640px;
 }
 
 .photo-list figure {
   margin: 0;
 }
 
+.photo-list figure.photo-wide {
+  grid-column: 1 / -1;
+}
+
 .photo-list img {
   width: 100%;
   height: auto;
+  display: block;
+}
+
+@media (max-width: 480px) {
+  .photo-list {
+    grid-template-columns: 1fr;
+  }
 }
 
 .photo-list-empty {

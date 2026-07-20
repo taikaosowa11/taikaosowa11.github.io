@@ -20,6 +20,13 @@
     img.src = "../images/photos/" + ALBUM + "/" + filename;
     img.alt = "";
     img.loading = "lazy";
+    // Square/landscape photos span both columns; portrait photos stay
+    // one column wide so two sit side by side.
+    img.addEventListener("load", function () {
+      if (img.naturalWidth >= img.naturalHeight) {
+        figure.classList.add("photo-wide");
+      }
+    });
     figure.appendChild(img);
     container.appendChild(figure);
   });
