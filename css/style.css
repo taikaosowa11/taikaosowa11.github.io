@@ -249,6 +249,7 @@ p { margin: 0 0 1.2rem; }
 
 .tournament-photos {
   display: flex;
+  flex-wrap: wrap;
   gap: 0.75rem;
   margin-top: 0.75rem;
 }
