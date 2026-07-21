@@ -35,7 +35,7 @@
     landing.classList.add("revealed");
   }
   landing.addEventListener("click", function (e) {
-    if (e.target.closest("a")) return; // let menu links navigate normally
+    if (e.target.closest("a")) return;
     reveal();
   });
   landing.addEventListener("keydown", function (e) {

@@ -1,22 +1,3 @@
-// Renders the PHOTOS array (defined inline in each album page) into the
-// .photo-list container. To add a photo: drop the image file into
-// images/<ALBUM_BASE>/<ALBUM>/ and add its filename as one more line in
-// the PHOTOS array — no other changes needed. ALBUM_BASE defaults to
-// "photos" if a page doesn't set it (used by the Photos albums); other
-// sections like Craftsmanship set ALBUM_BASE = "craftsmanship". Pages
-// one folder deep (photos/*.html, craftsmanship/*.html) don't need to
-// set IMAGE_PREFIX — it defaults to "../images/". Root-level pages
-// (like jiujitsu.html) set IMAGE_PREFIX = "images/" instead.
-//
-// Layout: square/landscape photos span both columns. Portrait photos
-// pair up two-per-row. If a run of consecutive portrait photos is odd
-// (would leave one stranded next to a gap), the last one in that run
-// is shown full width instead.
-//
-// Photos are inserted right away and load lazily (so the page appears
-// instantly and only downloads images as you scroll to them); the
-// odd-run fix-up runs quietly in the background once everything has
-// finished loading, without blocking the initial render.
 (function () {
   var container = document.querySelector(".photo-list");
   if (!container) return;
@@ -35,6 +16,7 @@
 
   var base = (typeof ALBUM_BASE !== "undefined") ? ALBUM_BASE : "photos";
   var prefix = (typeof IMAGE_PREFIX !== "undefined") ? IMAGE_PREFIX : "../images/";
+  var forceTwoColumn = (typeof FORCE_TWO_COLUMN !== "undefined") ? FORCE_TWO_COLUMN : false;
 
   var figures = new Array(PHOTOS.length).fill(null);
   var settled = new Array(PHOTOS.length).fill(false);
@@ -48,8 +30,10 @@
     img.loading = "lazy";
 
     img.addEventListener("load", function () {
-      wide[idx] = img.naturalWidth >= img.naturalHeight;
-      if (wide[idx]) figure.classList.add("photo-wide");
+      if (!forceTwoColumn) {
+        wide[idx] = img.naturalWidth >= img.naturalHeight;
+        if (wide[idx]) figure.classList.add("photo-wide");
+      }
       settled[idx] = true;
       maybeFixOddRuns();
     });
@@ -65,11 +49,9 @@
     figures[idx] = figure;
   });
 
-  // Once every photo has loaded (or failed), do a final pass: any run of
-  // consecutive portrait photos with an odd count gets its last photo
-  // switched to full width instead of left stranded next to a gap.
   function maybeFixOddRuns() {
     if (settled.indexOf(false) !== -1) return;
+    if (forceTwoColumn) return;
 
     var i = 0;
     while (i < figures.length) {
