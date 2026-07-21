@@ -291,9 +291,25 @@ p { margin: 0 0 1.2rem; }
 
 .links-list a:hover { color: var(--muted); }
 
+.links-list a span:first-child {
+  display: inline-block;
+  transition: transform 0.2s ease;
+  transform-origin: left center;
+}
+
+.links-list a:hover span:first-child {
+  transform: scale(1.08);
+}
+
 .links-list .links-arrow {
   font-size: 0.8rem;
   color: var(--muted);
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.links-list a:hover .links-arrow {
+  transform: translateX(10px) scale(1.6);
 }
 
 .album-grid {
