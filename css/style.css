@@ -245,6 +245,20 @@ p { margin: 0 0 1.2rem; }
   color: var(--paper);
 }
 
+/* ---------- Tournament result photos (Jiu Jitsu) ---------- */
+
+.tournament-photos {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+.tournament-photos img {
+  width: 140px;
+  height: 140px;
+  object-fit: cover;
+}
+
 .cv-entry {
   display: grid;
   grid-template-columns: 110px 1fr;
