@@ -241,6 +241,14 @@ p { margin: 0 0 1.2rem; }
   margin-top: 0.75rem;
 }
 
+.project-row {
+  margin-bottom: 2.5rem;
+}
+
+.project-row:last-child {
+  margin-bottom: 0;
+}
+
 .tournament-photos img {
   width: 140px;
   height: 140px;
