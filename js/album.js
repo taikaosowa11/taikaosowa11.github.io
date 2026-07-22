@@ -22,10 +22,20 @@
   var settled = new Array(PHOTOS.length).fill(false);
   var wide = new Array(PHOTOS.length).fill(false);
 
-  PHOTOS.forEach(function (filename, idx) {
+  function getFile(idx) {
+    var entry = PHOTOS[idx];
+    return (typeof entry === "string") ? entry : entry.file;
+  }
+
+  function getCaption(idx) {
+    var entry = PHOTOS[idx];
+    return (typeof entry === "string") ? "" : (entry.caption || "");
+  }
+
+  PHOTOS.forEach(function (entry, idx) {
     var figure = document.createElement("figure");
     var img = document.createElement("img");
-    img.src = prefix + base + "/" + ALBUM + "/" + filename;
+    img.src = prefix + base + "/" + ALBUM + "/" + getFile(idx);
     img.alt = "";
     img.loading = "lazy";
 
@@ -45,6 +55,9 @@
     });
 
     figure.appendChild(img);
+    figure.addEventListener("click", function () {
+      openLightbox(idx);
+    });
     container.appendChild(figure);
     figures[idx] = figure;
   });
@@ -68,5 +81,88 @@
         figures[lastIdx].classList.add("photo-wide");
       }
     }
+  }
+
+  var lightbox = null;
+  var lightboxImg = null;
+  var lightboxCaption = null;
+  var currentIndex = -1;
+
+  function validIndices() {
+    var arr = [];
+    for (var i = 0; i < figures.length; i++) {
+      if (figures[i]) arr.push(i);
+    }
+    return arr;
+  }
+
+  function buildLightbox() {
+    var overlay = document.createElement("div");
+    overlay.className = "lightbox";
+    overlay.innerHTML =
+      '<button type="button" class="lightbox-close" aria-label="Close">&times;</button>' +
+      '<button type="button" class="lightbox-prev" aria-label="Previous photo">&larr;</button>' +
+      '<div class="lightbox-content">' +
+        '<img class="lightbox-img" alt="">' +
+        '<p class="lightbox-caption"></p>' +
+      '</div>' +
+      '<button type="button" class="lightbox-next" aria-label="Next photo">&rarr;</button>';
+    document.body.appendChild(overlay);
+
+    overlay.querySelector(".lightbox-close").addEventListener("click", closeLightbox);
+    overlay.querySelector(".lightbox-prev").addEventListener("click", function (e) {
+      e.stopPropagation();
+      step(-1);
+    });
+    overlay.querySelector(".lightbox-next").addEventListener("click", function (e) {
+      e.stopPropagation();
+      step(1);
+    });
+    overlay.addEventListener("click", function (e) {
+      if (e.target === overlay) closeLightbox();
+    });
+    document.addEventListener("keydown", function (e) {
+      if (!overlay.classList.contains("open")) return;
+      if (e.key === "Escape") closeLightbox();
+      else if (e.key === "ArrowLeft") step(-1);
+      else if (e.key === "ArrowRight") step(1);
+    });
+
+    return overlay;
+  }
+
+  function showCurrent() {
+    lightboxImg.src = prefix + base + "/" + ALBUM + "/" + getFile(currentIndex);
+    var caption = getCaption(currentIndex);
+    lightboxCaption.textContent = caption;
+    lightboxCaption.style.display = caption ? "" : "none";
+  }
+
+  function step(direction) {
+    var valid = validIndices();
+    if (!valid.length) return;
+    var pos = valid.indexOf(currentIndex);
+    pos = (pos + direction + valid.length) % valid.length;
+    currentIndex = valid[pos];
+    showCurrent();
+  }
+
+  function openLightbox(idx) {
+    if (!figures[idx]) return;
+    if (!lightbox) {
+      lightbox = buildLightbox();
+      lightboxImg = lightbox.querySelector(".lightbox-img");
+      lightboxCaption = lightbox.querySelector(".lightbox-caption");
+    }
+    currentIndex = idx;
+    showCurrent();
+    lightbox.classList.add("open");
+    document.body.classList.add("lightbox-open");
+  }
+
+  function closeLightbox() {
+    if (!lightbox) return;
+    lightbox.classList.remove("open");
+    document.body.classList.remove("lightbox-open");
   }
 })();
